@@ -9,15 +9,7 @@ function dificuldade_por_pergunta($n){
   if ($n == 16) return 'Pergunta do Milhão';
   return 'Fácil';
 }
-function pontos_por_dificuldade($dif){
-  switch ($dif){
-    case 'Fácil': return 100;
-    case 'Média': return 500;
-    case 'Difícil': return 1000;
-    case 'Pergunta do Milhão': return 10000;
-    default: return 100;
-  }
-}
+// Removida a função 'pontos_por_dificuldade'
 
 $bd = new ConectaBanco();
 
@@ -30,7 +22,7 @@ if(isset($_GET['acao']) && $_GET['acao'] === 'pular'){
 }
 
 // Se o jogo terminou, não sorteia mais perguntas
-if(($_SESSION['status'] ?? '') === 'fim'){
+if(($_SESSION['status'] ?? '') === 'fim' || ($_SESSION['status'] ?? '') === 'fim_ganhou'){
     header('Location: area_jogo.php');
     exit;
 }
@@ -77,3 +69,4 @@ $_SESSION['perguntas_sorteadas'][] = (int)$questao['id'];
 // Redireciona para a área do jogo
 header('Location: area_jogo.php');
 exit;
+?>

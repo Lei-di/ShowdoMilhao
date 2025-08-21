@@ -1,18 +1,7 @@
 <?php
 session_start();
 require_once 'ConectaBanco.php';
-
-function pontos_por_dificuldade($dif){
-  switch ($dif){
-    case 'Fácil': return 100;
-    case 'Média': return 500;
-    case 'Difícil': return 1000;
-    case 'Pergunta do Milhão': return 10000;
-    default: return 100;
-  }
-}
-
-$bd = new ConectaBanco();
+require_once 'questoes_valores.php'; // Incluindo a tabela de valores
 
 // Ação de carta (50/50) antes de processar resposta
 if(isset($_POST['acao']) && $_POST['acao'] === 'carta'){
@@ -61,26 +50,32 @@ if(isset($_POST['formulario'])){
 
     $acertou = ($q['correta'] === $resposta);
     
-    // A dificuldade para a pontuação agora depende do número da pergunta
-    function dificuldade_por_pergunta($n){
-        if ($n >= 1 && $n <= 5) return 'Fácil';
-        if ($n >= 6 && $n <= 10) return 'Média';
-        if ($n >= 11 && $n <= 15) return 'Difícil';
-        if ($n == 16) return 'Pergunta do Milhão';
-        return 'Fácil';
-    }
-    $dif = dificuldade_por_pergunta($_SESSION['pergunta'] ?? 1);
-    $pontos = pontos_por_dificuldade($dif);
+    // Obtém o valor da próxima pergunta
+    $pergunta_atual_num = $_SESSION['pergunta'] ?? 1;
+    $pontos = $questao_valor[$pergunta_atual_num - 1] ?? 0;
 
     if($acertou){
-        $_SESSION['pontuacao'] = ($_SESSION['pontuacao'] ?? 0) + $pontos;
-        $_SESSION['pergunta'] = ($_SESSION['pergunta'] ?? 1) + 1;
+        $_SESSION['pontuacao'] = $pontos;
+        $_SESSION['pergunta'] = ($pergunta_atual_num) + 1;
         $_SESSION['status'] = 'acertou';
+        
+        // Se acertou a última pergunta (16), ganha o prêmio máximo e finaliza o jogo
+        if($pergunta_atual_num == 16){
+            $_SESSION['status'] = 'fim_ganhou';
+            header('Location: area_jogo.php');
+            exit;
+        }
+
         header('Location: sorteia_questao.php');
         exit;
     } else {
-        // errou: perde metade do acumulado e fim
-        $_SESSION['pontuacao'] = floor(($_SESSION['pontuacao'] ?? 0) / 2);
+        // errou: perde metade do acumulado, exceto na pergunta 16
+        if ($pergunta_atual_num == 16) {
+             $_SESSION['pontuacao'] = 0;
+        } else {
+            $_SESSION['pontuacao'] = floor(($_SESSION['pontuacao'] ?? 0) / 2);
+        }
+        
         $_SESSION['status'] = 'fim';
         header('Location: area_jogo.php');
         exit;
@@ -89,3 +84,4 @@ if(isset($_POST['formulario'])){
 
 header('Location: area_jogo.php');
 exit;
+?>

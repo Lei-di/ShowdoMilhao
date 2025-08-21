@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'ConectaBanco.php';
+require_once 'questoes_valores.php'; // Incluindo a tabela de valores
 
 $bd = new ConectaBanco();
 
@@ -53,6 +54,13 @@ switch ($dificuldade_atual) {
         $badge_class = 'million';
         break;
 }
+
+// Valores de pontuação e prêmio
+$pergunta_atual_num = $_SESSION['pergunta'] ?? 1;
+$valor_pergunta = $questao_valor[$pergunta_atual_num - 1] ?? 0;
+$valor_acumulado = $questao_valor[$pergunta_atual_num - 2] ?? 0;
+$pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
+
 ?>
 <?php require_once __DIR__ . '/style_inject.php'; ?>
 
@@ -69,13 +77,18 @@ switch ($dificuldade_atual) {
   <div class="card quiz">
     <div class="scoreboard">
       <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
-      <div class="money">Pontuação: <?php echo $_SESSION['pontuacao']; ?></div>
+      <div class="money">Você está tentando: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></div>
     </div>
-
+    <div class="scoreboard">
+        <div class="money">Você já acumulou: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
+    </div>
+    
     <?php if($_SESSION['status']==='acertou'): ?>
       <div class="feedback success pop">✔ Você acertou! Próxima pergunta...</div>
     <?php elseif($_SESSION['status']==='fim'): ?>
-      <div class="feedback danger pop">✖ Errou! Fim de jogo. Sua pontuação final: <?php echo $_SESSION['pontuacao']; ?></div>
+      <div class="feedback danger pop">✖ Errou! Fim de jogo. Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
+    <?php elseif($_SESSION['status']==='fim_ganhou'): ?>
+      <div class="feedback success pop">🎉 Parabéns! Você acertou a pergunta do milhão! Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
     <?php elseif($_SESSION['status']==='pulo'): ?>
       <div class="toast"><span class="title">Pulo usado</span><span class="msg">Você pulou a pergunta. Restam <?php echo $_SESSION['pulos']; ?>.</span></div>
     <?php elseif($_SESSION['status']==='carta'): ?>
@@ -114,12 +127,17 @@ switch ($dificuldade_atual) {
     
     <div class="card ajuda-container">
         <form method="get" action="sorteia_questao.php" style="display:inline">
-          <button class="lifeline<?php echo ($_SESSION['pulos']<=0?' used':'');?>" <?php echo ($_SESSION['pulos']<=0?'disabled':'');?> name="acao" value="pular" type="submit">⏭️ Pular (<?php echo $_SESSION['pulos'];?>)</button>
+          <button class="lifeline<?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta ? ' used':'');?>" <?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta?'disabled':'');?> name="acao" value="pular" type="submit">⏭️ Pular (<?php echo $_SESSION['pulos'];?>)</button>
         </form>
         <form method="post" action="processa_resposta.php" style="display:inline">
-          <button class="lifeline<?php echo ($_SESSION['cartas']<=0?' used':'');?>" <?php echo ($_SESSION['cartas']<=0?'disabled':'');?> name="acao" value="carta" type="submit">🎴 Carta (<?php echo $_SESSION['cartas'];?>)</button>
+          <button class="lifeline<?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta?' used':'');?>" <?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta?'disabled':'');?> name="acao" value="carta" type="submit">🎴 Carta (<?php echo $_SESSION['cartas'];?>)</button>
         </form>
-        <?php if($_SESSION['status']==='fim'): ?>
+        
+        <form method="get" action="parar_jogo.php" style="display:inline">
+          <button class="lifeline" type="submit">🛑 Parar e Pegar Dinheiro</button>
+        </form>
+        
+        <?php if($_SESSION['status']==='fim' || $_SESSION['status']==='fim_ganhou'): ?>
             <a class="btn" href="novo_jogo.php">Jogar novamente</a>
         <?php endif; ?>
     </div>
