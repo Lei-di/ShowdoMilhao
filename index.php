@@ -2,18 +2,16 @@
 <div class="header">
   <div class="container inner">
     <a class="brand" href="index.php"><span class="coin"></span> Show do Milhão</a>
-    <a class="btn" href="novo_jogo.php">Começar o jogo</a>
+    <div class="header-links">
+        <a class="btn" href="novo_jogo.php">Começar o jogo</a>
+        <a class="btn secondary" href="insere_questao.php">Cadastrar perguntas</a>
+    </div>
   </div>
 </div>
 
-<section class="container hero">
-  <h1>Show do Milhão — Perguntas e Respostas</h1>
-  <p>Cadastre perguntas, jogue por dificuldade e tente alcançar o milhão. Você começa com 3 pulos e 3 cartas (50/50).</p>
-  <div class="mt-3">
-    <a class="btn" href="novo_jogo.php">Começar o jogo</a>
-    <a class="btn secondary" href="insere_questao.php">Cadastrar perguntas</a>
-  </div>
-</section>
+<main class="container main-content">
+  <img src="https://segaretro.org/images/9/90/ShowdoMilhao_title.png" alt="Logo Show do Milhão">
+</main>
 
 </body>
 </html>

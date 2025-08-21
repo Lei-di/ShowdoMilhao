@@ -34,6 +34,10 @@ body {
   margin-left: 20px;
 }
 
+.header-links a {
+  margin-left: 15px;
+}
+
 /* Container */
 .container {
   width: 90%;
@@ -181,3 +185,17 @@ body {
 
 .progress .step.active { background: yellow; color: #00164d; font-weight: bold; }
 .progress .step.done { background: green; color: white; }
+
+/* Adicionado para a nova tela inicial */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; /* Faz o container principal ocupar o espaço restante */
+}
+
+.main-content img {
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+}
