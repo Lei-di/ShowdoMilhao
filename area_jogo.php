@@ -111,16 +111,7 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
   </div>
 
   <aside class="sidebar">
-    <div class="card">
-      <div class="card-title mb-2">Progresso</div>
-      <div class="progress">
-        <?php for($i=1; $i<=16; $i++): ?>
-          <span class="step <?php echo ($i < $_SESSION['pergunta'] ? 'done' : ($i==$_SESSION['pergunta']?'active':''));?>"><?php echo $i; ?></span>
-        <?php endfor; ?>
-      </div>
-    </div>
-    
-    <div class="card ajuda-container">
+    <div class="ajuda-container">
         <form method="get" action="sorteia_questao.php" style="display:inline">
           <button class="lifeline<?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta ? ' used':'');?>" <?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta?'disabled':'');?> name="acao" value="pular" type="submit">⏭️ Pular (<?php echo $_SESSION['pulos'];?>)</button>
         </form>
@@ -137,6 +128,17 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
         <?php endif; ?>
     </div>
   </aside>
+</div>
+
+<div class="progress-container">
+  <div class="card">
+    <div class="card-title mb-2">Progresso</div>
+    <div class="progress">
+      <?php for($i=1; $i<=16; $i++): ?>
+        <span class="step <?php echo ($i < $_SESSION['pergunta'] ? 'done' : ($i==$_SESSION['pergunta']?'active':''));?>"><?php echo $i; ?></span>
+      <?php endfor; ?>
+    </div>
+  </div>
 </div>
 
 </body>
