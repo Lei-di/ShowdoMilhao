@@ -77,10 +77,10 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
   <div class="card quiz">
     <div class="scoreboard">
       <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
-      <div class="money">Você está tentando: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></div>
+      <div class="money">Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></div>
     </div>
     <div class="scoreboard">
-        <div class="money">Você já acumulou: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
+        <div class="money">Acumulado: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
     </div>
     
     <?php if($_SESSION['status']==='acertou'): ?>
