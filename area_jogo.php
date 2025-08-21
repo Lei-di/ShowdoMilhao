@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'ConectaBanco.php';
-require_once 'questoes_valores.php'; // Incluindo a tabela de valores
+require_once 'questoes_valores.php';
 
 $bd = new ConectaBanco();
 
@@ -120,7 +120,7 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
         </form>
         
         <form method="get" action="parar_jogo.php" style="display:inline">
-          <button class="lifeline" type="submit">🛑 Parar e Pegar Dinheiro</button>
+          <button class="lifeline" type="submit">🛑 Parar</button>
         </form>
         
         <?php if($_SESSION['status']==='fim' || $_SESSION['status']==='fim_ganhou'): ?>
@@ -131,7 +131,7 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
 </div>
 
 <div class="progress-container">
-  <div class="card">
+  <div class="progress-wrapper">
     <div class="card-title mb-2">Progresso</div>
     <div class="progress">
       <?php for($i=1; $i<=16; $i++): ?>
