@@ -118,18 +118,30 @@ body {
   color: white;
 }
 
-.badge.easy { background: green; }
-.badge.medium { background: orange; }
-.badge.hard { background: red; }
-.badge.million { background: purple; }
+.badge.easy {
+  background: green;
+}
+
+.badge.medium {
+  background: orange;
+}
+
+.badge.hard {
+  background: red;
+}
+
+.badge.million {
+  background: purple;
+}
 
 /* Ajudas */
 .ajuda-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-    align-items: flex-end; /* Alinha os itens à direita */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  align-items: flex-end;
+  /* Alinha os itens à direita */
 }
 
 .lifeline {
@@ -142,7 +154,8 @@ body {
   cursor: pointer;
 }
 
-.lifeline.used, .lifeline:disabled {
+.lifeline.used,
+.lifeline:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
@@ -157,8 +170,13 @@ body {
   border-radius: 10px;
 }
 
-.feedback.success { background: green; }
-.feedback.danger { background: darkred; }
+.feedback.success {
+  background: green;
+}
+
+.feedback.danger {
+  background: darkred;
+}
 
 /* Barra lateral */
 .sidebar {
@@ -183,15 +201,24 @@ body {
   border: 2px solid yellow;
 }
 
-.progress .step.active { background: yellow; color: #00164d; font-weight: bold; }
-.progress .step.done { background: green; color: white; }
+.progress .step.active {
+  background: yellow;
+  color: #00164d;
+  font-weight: bold;
+}
+
+.progress .step.done {
+  background: green;
+  color: white;
+}
 
 /* Adicionado para a nova tela inicial */
 .main-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Faz o container principal ocupar o espaço restante */
+  flex-grow: 1;
+  /* Faz o container principal ocupar o espaço restante */
 }
 
 .main-content img {
