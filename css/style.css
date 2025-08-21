@@ -226,14 +226,3 @@ body {
   height: auto;
   max-height: 80vh;
 }
-
-/* NOVO: Estilo para o layout do jogo */
-.game-layout {
-  display: flex;
-  gap: 30px; /* Espaço entre os elementos */
-  align-items: flex-start; /* Alinha o topo dos elementos */
-}
-
-.card.quiz {
-  flex-grow: 1; /* Permite que o card de perguntas ocupe o espaço disponível */
-}
