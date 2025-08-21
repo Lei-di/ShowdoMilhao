@@ -3,6 +3,10 @@ session_start();
 require_once 'ConectaBanco.php';
 require_once 'questoes_valores.php'; // Incluindo a tabela de valores
 
+// A inicialização da classe ConectaBanco deve ficar aqui,
+// para que a variável $bd seja acessível em todo o script.
+$bd = new ConectaBanco();
+
 // Ação de carta (50/50) antes de processar resposta
 if(isset($_POST['acao']) && $_POST['acao'] === 'carta'){
     if(isset($_SESSION['cartas']) && $_SESSION['cartas'] > 0){
