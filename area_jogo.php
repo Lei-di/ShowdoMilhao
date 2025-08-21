@@ -1,22 +1,19 @@
 <?php
 session_start();
 require_once 'ConectaBanco.php';
-require_once 'questoes_valores.php'; // Incluindo a tabela de valores
+require_once 'questoes_valores.php';
 
 $bd = new ConectaBanco();
 
-// Se não houver questão atual ainda, vai sortear
 if(empty($_SESSION['questao_atual'])){
   header('Location: sorteia_questao.php');
   exit;
 }
 
-// Busca a questão atual
 $q_id = (int)$_SESSION['questao_atual'];
 $res = $bd->query("SELECT * FROM questoes WHERE id='$q_id'");
 $quest = mysqli_fetch_assoc($res);
 
-// Monta opções
 $opcoes = [
   $quest['alternativa1'],
   $quest['alternativa2'],
@@ -24,10 +21,8 @@ $opcoes = [
   $quest['alternativa4']
 ];
 
-// Mapeia os índices de volta para A, B, C, D para facilitar o display
 function letra($i){ $a = ['A','B','C','D']; return $a[$i]; }
 
-// Determina a dificuldade atual da pergunta com base no número da pergunta
 function dificuldade_por_pergunta($n){
     if ($n >= 1 && $n <= 5) return 'Fácil';
     if ($n >= 6 && $n <= 10) return 'Média';
@@ -38,7 +33,6 @@ function dificuldade_por_pergunta($n){
 
 $dificuldade_atual = dificuldade_por_pergunta($_SESSION['pergunta'] ?? 1);
 
-// Adiciona a classe de badge
 $badge_class = '';
 switch ($dificuldade_atual) {
     case 'Fácil':
@@ -55,7 +49,6 @@ switch ($dificuldade_atual) {
         break;
 }
 
-// Valores de pontuação e prêmio
 $pergunta_atual_num = $_SESSION['pergunta'] ?? 1;
 $valor_pergunta = $questao_valor[$pergunta_atual_num - 1] ?? 0;
 $valor_acumulado = $questao_valor[$pergunta_atual_num - 2] ?? 0;
@@ -67,9 +60,6 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
 <div class="header">
   <div class="container inner">
     <a class="brand" href="index.php"><span class="coin"></span> Show do Milhão</a>
-    <span class="badge dot <?php echo $badge_class; ?>">
-        <?php echo $dificuldade_atual; ?>
-    </span>
   </div>
 </div>
 
@@ -78,6 +68,9 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
     <div class="scoreboard">
       <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
       <div class="money">Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></div>
+      <span class="badge dot <?php echo $badge_class; ?>">
+        <?php echo $dificuldade_atual; ?>
+      </span>
     </div>
     <div class="scoreboard">
         <div class="money">Acumulado: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
