@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'ConectaBanco.php';
-require_once 'questoes_valores.php';
+require_once 'questoes_valores.php'; // Incluindo a tabela de valores
 
 $bd = new ConectaBanco();
 
@@ -67,10 +67,12 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
   <div class="card quiz">
     <div class="scoreboard">
       <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
-      <div class="money">Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></div>
-      <span class="badge dot <?php echo $badge_class; ?>">
-        <?php echo $dificuldade_atual; ?>
-      </span>
+      <div class="money">
+          <span>Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></span>
+          <span class="badge dot <?php echo $badge_class; ?>">
+              <?php echo $dificuldade_atual; ?>
+          </span>
+      </div>
     </div>
     <div class="scoreboard">
         <div class="money">Acumulado: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
