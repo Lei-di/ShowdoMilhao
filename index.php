@@ -1,7 +1,6 @@
 <?php require_once __DIR__ . '/style_inject.php'; ?>
 <div class="header">
   <div class="container inner">
-    <a class="brand" href="index.php"><span class="coin"></span> Show do Milhão</a>
     <div class="header-links">
         <a class="btn" href="novo_jogo.php">Começar o jogo</a>
         <a class="btn secondary" href="insere_questao.php">Cadastrar perguntas</a>
