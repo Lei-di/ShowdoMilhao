@@ -131,13 +131,11 @@ $pode_pular_ou_carta = ($_SESSION['pergunta'] < 16);
 </div>
 
 <div class="progress-container">
-  <div class="progress-wrapper">
-    <div class="card-title mb-2">Progresso</div>
-    <div class="progress">
-      <?php for($i=1; $i<=16; $i++): ?>
-        <span class="step <?php echo ($i < $_SESSION['pergunta'] ? 'done' : ($i==$_SESSION['pergunta']?'active':''));?>"><?php echo $i; ?></span>
-      <?php endfor; ?>
-    </div>
+  <div class="card-title mb-2">Progresso</div>
+  <div class="progress">
+    <?php for($i=1; $i<=16; $i++): ?>
+      <span class="step <?php echo ($i < $_SESSION['pergunta'] ? 'done' : ($i==$_SESSION['pergunta']?'active':''));?>"><?php echo $i; ?></span>
+    <?php endfor; ?>
   </div>
 </div>
 
