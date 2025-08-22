@@ -83,9 +83,9 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
     <?php endif; ?>
     
     <?php if($_SESSION['status']==='acertou'): ?>
-      <div class="feedback success pop">Você acertou! Próxima pergunta...</div>
+      <div class="feedback success pop">✔ Você acertou! Próxima pergunta...</div>
     <?php elseif($_SESSION['status']==='fim'): ?>
-      <div class="feedback danger pop">Jogo cancelado! Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
+      <div class="feedback danger pop">✖ Jogo cancelado! Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
     <?php elseif($_SESSION['status']==='fim_ganhou'): ?>
       <div class="feedback success pop">
         Parabéns! Você ganhou 1 milhão!!
