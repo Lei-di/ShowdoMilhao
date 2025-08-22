@@ -65,7 +65,7 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
 </div>
 
 <div class="container game-layout">
-  <div class="card quiz">
+  <div class="quiz">
 
     <?php if($_SESSION['status'] !== 'fim_ganhou'): ?>
       <div class="scoreboard">
@@ -121,32 +121,21 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
   <aside class="sidebar">
     <div class="ajuda-container">
         <form method="get" action="sorteia_questao.php" style="display:inline">
-          <button class="lifeline<?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta || $jogo_acabou ? ' used':'');?>" <?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta || $jogo_acabou?'disabled':'');?> name="acao" value="pular" type="submit">⏭️ Pular (<?php echo $_SESSION['pulos'];?>)</button>
+          <button class="lifeline<?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta || $jogo_acabou ? ' used':'');?>" <?php echo ($_SESSION['pulos']<=0 || !$pode_pular_ou_carta || $jogo_acabou?'disabled':'');?> name="acao" value="pular" type="submit">Pular (<?php echo $_SESSION['pulos'];?>)</button>
         </form>
         <form method="post" action="processa_resposta.php" style="display:inline">
-          <button class="lifeline<?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta || $jogo_acabou?' used':'');?>" <?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta || $jogo_acabou?'disabled':'');?> name="acao" value="carta" type="submit">🎴 Carta (<?php echo $_SESSION['cartas'];?>)</button>
+          <button class="lifeline<?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta || $jogo_acabou?' used':'');?>" <?php echo ($_SESSION['cartas']<=0 || !$pode_pular_ou_carta || $jogo_acabou?'disabled':'');?> name="acao" value="carta" type="submit">Carta (<?php echo $_SESSION['cartas'];?>)</button>
         </form>
         
         <form method="get" action="parar_jogo.php" style="display:inline">
-          <button class="lifeline<?php echo ($jogo_acabou?' used':'');?>" <?php echo ($jogo_acabou?'disabled':'');?> type="submit">🛑 Parar</button>
+          <button class="lifeline<?php echo ($jogo_acabou?' used':'');?>" <?php echo ($jogo_acabou?'disabled':'');?> type="submit">Parar</button>
         </form>
         
         <?php if($jogo_acabou): ?>
-            <a class="btn" href="novo_jogo.php">Jogar novamente</a>
+            <a class="btn btn-restart" href="novo_jogo.php">Jogar novamente</a>
         <?php endif; ?>
     </div>
   </aside>
 </div>
-
-<div class="progress-container">
-  <div class="progress-wrapper">
-    <div class="progress">
-      <?php for($i=1; $i<=16; $i++): ?>
-        <span class="step <?php echo ($i < $_SESSION['pergunta'] ? 'done' : ($i==$_SESSION['pergunta']?'active':''));?>"><?php echo $i; ?></span>
-      <?php endfor; ?>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>

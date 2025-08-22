@@ -4,9 +4,8 @@ require_once 'ConectaBanco.php';
 
 function dificuldade_por_pergunta($n){
   if ($n >= 1 && $n <= 5) return 'Fácil';
-  if ($n >= 6 && $n <= 10) return 'Média';
-  if ($n >= 11 && $n <= 15) return 'Difícil';
-  if ($n == 16) return 'Pergunta do Milhão';
+  if ($n >= 6 && $n <= 10) return 'Médio';
+  if ($n >= 11 && $n <= 16) return 'Difícil';
   return 'Fácil';
 }
 // Removida a função 'pontos_por_dificuldade'
@@ -23,13 +22,6 @@ if(isset($_GET['acao']) && $_GET['acao'] === 'pular'){
 
 // Se o jogo terminou, não sorteia mais perguntas
 if(($_SESSION['status'] ?? '') === 'fim' || ($_SESSION['status'] ?? '') === 'fim_ganhou'){
-    header('Location: area_jogo.php');
-    exit;
-}
-
-// Se chegou na pergunta 16, ela deve ser a última
-if(($_SESSION['pergunta'] ?? 1) > 16){
-    $_SESSION['status'] = 'fim';
     header('Location: area_jogo.php');
     exit;
 }
