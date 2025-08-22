@@ -83,9 +83,9 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
     <?php endif; ?>
     
     <?php if($_SESSION['status']==='acertou'): ?>
-      <div class="feedback success pop">✔ Você acertou! Próxima pergunta...</div>
+      <div class="feedback success pop">Você acertou! Próxima pergunta...</div>
     <?php elseif($_SESSION['status']==='fim'): ?>
-      <div class="feedback danger pop">✖ Jogo cancelado! Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
+      <div class="feedback danger pop">Jogo cancelado! Sua pontuação final: R$ <?php echo number_format($_SESSION['pontuacao'], 2, ',', '.'); ?></div>
     <?php elseif($_SESSION['status']==='fim_ganhou'): ?>
       <div class="feedback success pop">
         Parabéns! Você ganhou 1 milhão!!
@@ -93,9 +93,9 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
         <img src="https://i.pinimg.com/736x/3c/55/59/3c555950acd8e875e84fed60b0a3d2b4.jpg" alt="Parabéns, 1 Milhão" style="max-width: 100%; height: auto; margin-top: 15px; max-height: 200px;">
       </div>
     <?php elseif($_SESSION['status']==='pulo'): ?>
-      <div class="toast"><span class="title">Pulo usado</span><span class="msg">Você pulou a pergunta. Restam <?php echo $_SESSION['pulos']; ?>.</span></div>
+     
     <?php elseif($_SESSION['status']==='carta'): ?>
-      <div class="toast"><span class="title">50/50</span><span class="msg">Removidas opções erradas.</span></div>
+      
     <?php endif; ?>
 
     <div class="question"><?php echo $quest['questao']; ?></div>
