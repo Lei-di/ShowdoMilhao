@@ -280,3 +280,53 @@ body {
   padding: 0 20px;
   flex-shrink: 0;
 }
+
+/* Estilos para o Formulário de Cadastro */
+.form-card {
+    max-width: 600px;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.form-card .card-title {
+    text-align: center;
+    color: yellow;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.form-grid label {
+    font-weight: bold;
+}
+
+.form-grid input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid yellow;
+    background: #00164d;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-grid input[type="submit"] {
+    background: yellow;
+    color: #00164d;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-grid input[type="submit"]:hover {
+    background: #ffcc00;
+}

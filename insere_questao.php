@@ -25,19 +25,44 @@
     }
 ?>
 
+<div class="header">
+  <div class="container inner">
+    <a class="brand" href="index.php"><span class="coin"></span> Show do Milhão</a>
+  </div>
+</div>
 
-<form action="insere_questao.php" method="post">
-    Questao: <input name="questao"> <br>
-    Alt 1: <input name="alternativa1"> <br>
-    Alt 2: <input name="alternativa2"> <br>
-    Alt 3: <input name="alternativa3"> <br>
-    Alt 4: <input name="alternativa4"> <br>
-    Correta: <input name="correta"> <br>
-    Categoria: <input name="categoria"> <br>
-    Dificuldade: <input name="dificuldade"> <br>
+<div class="container">
+    <div class="card form-card">
+        <h2 class="card-title">Cadastrar nova Questão</h2>
+        <form action="insere_questao.php" method="post" class="form-grid">
+            <label>Questão:</label>
+            <input name="questao" type="text" required>
+            
+            <label>Alternativa 1:</label>
+            <input name="alternativa1" type="text" required>
+            
+            <label>Alternativa 2:</label>
+            <input name="alternativa2" type="text" required>
+            
+            <label>Alternativa 3:</label>
+            <input name="alternativa3" type="text" required>
+            
+            <label>Alternativa 4:</label>
+            <input name="alternativa4" type="text" required>
+            
+            <label>Correta:</label>
+            <input name="correta" type="text" required>
+            
+            <label>Categoria:</label>
+            <input name="categoria" type="text" required>
+            
+            <label>Dificuldade:</label>
+            <input name="dificuldade" type="text" required>
+            
+            <input type="submit" value="Cadastrar" class="btn">
+        </form>
+    </div>
+</div>
 
-    <input type="submit" value="Cadastrar">
-
-</form>
 </body>
 </html>

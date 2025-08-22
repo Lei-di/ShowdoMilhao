@@ -66,18 +66,21 @@ $jogo_acabou = ($_SESSION['status'] === 'fim' || $_SESSION['status'] === 'fim_ga
 
 <div class="container game-layout">
   <div class="card quiz">
-    <div class="scoreboard">
-      <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
-      <div class="money">
-          <span>Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></span>
-          <span class="badge dot <?php echo $badge_class; ?>">
-              <?php echo $dificuldade_atual; ?>
-          </span>
+
+    <?php if($_SESSION['status'] !== 'fim_ganhou'): ?>
+      <div class="scoreboard">
+        <div class="score">Pergunta #<?php echo $_SESSION['pergunta']; ?></div>
+        <div class="money">
+            <span>Valor: R$ <?php echo number_format($valor_pergunta, 2, ',', '.'); ?></span>
+            <span class="badge dot <?php echo $badge_class; ?>">
+                <?php echo $dificuldade_atual; ?>
+            </span>
+        </div>
       </div>
-    </div>
-    <div class="scoreboard">
-        <div class="money">Acumulado: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
-    </div>
+      <div class="scoreboard">
+          <div class="money">Acumulado: R$ <?php echo number_format($valor_acumulado, 2, ',', '.'); ?></div>
+      </div>
+    <?php endif; ?>
     
     <?php if($_SESSION['status']==='acertou'): ?>
       <div class="feedback success pop">✔ Você acertou! Próxima pergunta...</div>
